@@ -1,0 +1,45 @@
+<a href="/">메뉴로 이동</a>
+<h1>사용자 등록</h1>
+
+<form>
+  성명: <input type="text" name="name" /> <br />
+  역할:
+  <input type="radio" name="role" value="driver" id="driver" /><label
+    for="driver"
+    >driver</label
+  >
+  <input type="radio" name="role" value="user" id="user" /><label for="user"
+    >user</label
+  >
+  <br />
+  로그인계정: <input type="text" name="email" /> <br />
+  비밀번호: <input type="password" name="password" /> <br />
+
+  <button onclick="post()">저장</button>
+</form>
+
+<script>
+  async function post() {
+    var data = {
+      name: '무엇을 입력했니?',
+      role: '',
+      email: '',
+      password: '',
+    };
+    var frm = document.forms[0];
+    data.name = frm.name.value;
+    data.role = frm.role.value;
+    data.email = frm.email.value;
+    data.password = frm.password.value;
+    confirm(JSON.stringify(data));
+
+    var url = '/api/users/signup';
+    const response = await fetch(url, {
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+</script>
